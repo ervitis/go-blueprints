@@ -1,0 +1,17 @@
+version: 1
+jobs:
+  build:
+    docker:
+      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      - image: circleci/golang:1.9
+
+    working_directory: /go/src/github.com/ervitis/go-blueprints
+
+    steps:
+      - checkout
+
+      - run:
+          name: Run unit tests
+
+          command: |
+            go test -v -race ./...
