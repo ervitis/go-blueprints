@@ -24,8 +24,6 @@ jobs:
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             go test -v -race ./... | tee ${TEST_RESULTS}/go-test.out
 
-      - run: make
-
       - store_artifacts:
           path: /tmp/test-results
           destination: raw-test-output
