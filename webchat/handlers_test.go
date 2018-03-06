@@ -36,3 +36,23 @@ func TestHealthCheckHandler(t *testing.T) {
 			rr.Body.String(), expected)
 	}
 }
+
+func TestHandlerMainPageTemplate(t *testing.T) {
+	req, err := http.NewRequest("GET", "/", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(handleTemplateMainPage)
+
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusOK {
+		t.Error("handler returned wrong status code: %v != %v", status, http.StatusOK)
+	}
+
+	if strings.Contains(rr.Body.String(), "Chat") == false {
+		t.Error("body doesn't not contain chat word")
+	}
+}
