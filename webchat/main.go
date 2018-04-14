@@ -29,7 +29,7 @@ func main() {
 	var addr = flag.String("addr", ":8080", "Address of the app")
 	flag.Parse()
 
-	http.Handle("/", &templateHandler{filename: "chat.html"})
+	http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
 
 	r := newRoom()
 	r.tracer = trace.New(os.Stdout)
