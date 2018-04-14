@@ -1,4 +1,4 @@
-version: 1
+version: 2
 jobs:
   build:
     docker:
@@ -9,15 +9,18 @@ jobs:
 
     environment:
       TEST_RESULTS: /tmp/test-results
+      GOPATH: $HOME/.go_project
+      PATH: $GOPATH/bin:$PATH
+      BUILD_PATH: ${GOPATH}/src/github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
 
     steps:
       - checkout
 
-      - run: mkdir -p ${TEST_RESULTS}
-
-      - run: go get github.com/gorilla/websocket
-
-      - run: go get github.com/jstemmer/go-junit-report
+      - run: |
+          mkdir -p ${TEST_RESULTS}
+          go get -u github.com/golang/dep/cmd/dep
+          dep ensure
+          go get github.com/jstemmer/go-junit-report
 
       - run:
           name: Run unit tests
