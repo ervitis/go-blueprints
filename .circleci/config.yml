@@ -9,6 +9,8 @@ jobs:
 
     environment:
       TEST_RESULTS: /tmp/test-results
+      GOPATH: $HOME/.go_project
+      PATH: $GOPATH/bin:$PATH
 
     steps:
       - checkout
