@@ -9,9 +9,6 @@ jobs:
 
     environment:
       TEST_RESULTS: /tmp/test-results
-      GOPATH: $HOME/.go_project
-      PATH: $GOPATH/bin:$PATH
-      BUILD_PATH: ${GOPATH}/src/github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}
 
     steps:
       - checkout
