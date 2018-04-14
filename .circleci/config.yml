@@ -15,6 +15,8 @@ jobs:
 
       - run: mkdir -p ${TEST_RESULTS}
 
+      - run: go get github.com/gorilla/websocket
+
       - run: go get github.com/jstemmer/go-junit-report
 
       - run:

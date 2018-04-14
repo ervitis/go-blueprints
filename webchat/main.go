@@ -7,6 +7,9 @@ import (
 	"text/template"
 	"path/filepath"
 	"flag"
+	"os"
+	"go-blueprints/trace"
+
 )
 
 type templateHandler struct {
@@ -29,6 +32,7 @@ func main() {
 	http.Handle("/", &templateHandler{filename: "chat.html"})
 
 	r := newRoom()
+	r.tracer = trace.New(os.Stdout)
 	http.Handle("/room", r)
 	go r.run()
 
